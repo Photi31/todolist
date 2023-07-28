@@ -1,0 +1,19 @@
+.primary {
+  cursor: pointer;
+
+  padding: 5px 20px;
+
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
+  color: var(--light-100, #fff);
+
+  background: var(--primary-500, #8c61ff);
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px 0 rgb(140 97 255 / 35%);
+}
+
+.fullWidth {
+  width: 100%;
+}

@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  position: sticky;
+  padding: 10px 0;
+  background: var(--color-dark-700);
+}
+
+.title {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-l);
+  color: var(--color-light-100);
+  text-transform: uppercase;
+}
