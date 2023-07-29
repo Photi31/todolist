@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: space-between;
 
-  width: 1200px;
+  width: 1000px;
   margin: 0 auto;
 }
 
@@ -15,9 +15,5 @@
 }
 
 .title {
-  font-size: var(--font-size-xxl);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-l);
-  color: var(--color-light-100);
   text-transform: uppercase;
 }

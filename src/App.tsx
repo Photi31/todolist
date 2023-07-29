@@ -1,12 +1,18 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import { Root } from 'Root.tsx'
+import { LoginForm } from 'components/login-form/login.tsx'
+import { Root } from 'components/root/Root.tsx'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
-    children: [],
+    children: [
+      {
+        path: '/login',
+        element: <LoginForm />,
+      },
+    ],
   },
 ])
 
