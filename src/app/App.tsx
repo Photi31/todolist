@@ -1,7 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import { Root } from 'app/root/Root.tsx'
-import { LoginForm } from 'features/auth/login-form/login.tsx'
+import { LoginForm } from 'features/auth/login-form/login'
+import { Todolists } from 'features/todolists/todolists'
 
 const router = createBrowserRouter([
   {
@@ -12,10 +13,10 @@ const router = createBrowserRouter([
         path: '/login',
         element: <LoginForm />,
       },
-      // {
-      //   path: '/todolists',
-      //   element: <Todolists />
-      // },
+      {
+        path: '/todolists',
+        element: <Todolists />,
+      },
     ],
   },
 ])

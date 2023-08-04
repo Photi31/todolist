@@ -25,7 +25,7 @@ export type ProfileType = {
 
 export type ResultCode = 0 | 1 | 10
 
-type ResponseType<T> = {
+export type ResponseType<T> = {
   resultCode: ResultCode
   messages: string[]
   data: T
