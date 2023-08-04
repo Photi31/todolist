@@ -1,11 +1,10 @@
 import { useController, useForm } from 'react-hook-form'
 
+import s from 'features/auth/login-form/login.module.scss'
 import { Button } from 'ui/button'
 import { Checkbox } from 'ui/checkBox'
 import { TextField } from 'ui/textField'
 import { Typography } from 'ui/typography'
-
-import s from './login.module.scss'
 
 type FormValues = {
   email: string

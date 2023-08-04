@@ -1,9 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 
+import s from 'app/header/header.module.scss'
 import { Button } from 'ui/button/button.tsx'
 import { Typography } from 'ui/typography'
-
-import s from './header.module.scss'
 
 export const Header = () => {
   const redirect = useNavigate()
