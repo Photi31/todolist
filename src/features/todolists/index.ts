@@ -1,1 +1,1 @@
-export * from './todolists'
+export * from 'features/todolists/components/todolists/todolists.tsx'

@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import { Root } from 'app/root/Root.tsx'
 import { LoginForm } from 'features/auth/login-form/login'
-import { Todolists } from 'features/todolists/todolists'
+import { Todolists } from 'features/todolists/components/todolists/todolists.tsx'
 
 const router = createBrowserRouter([
   {
