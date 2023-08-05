@@ -8,16 +8,13 @@ export const tasksApi = {
     })
   },
   addTask: (todolistId: string, title: string) => {
-    return instance.post<ResponseType<{ item: TaskType }>>(`/todo-lists/${todolistId}/tasks`, title)
+    return instance.post<AddTaskResponseType>(`/todo-lists/${todolistId}/tasks`, title)
   },
   deleteTask: (todolistId: string, taskId: string) => {
     return instance.delete<ResponseType<{}>>(`todo-lists/${todolistId}/tasks/${taskId}`)
   },
   changeTask: (todolistId: string, taskId: string, task: ChangeTask) => {
-    return instance.put<ResponseType<{ item: TaskType }>>(
-      `todo-lists/${todolistId}/tasks/${taskId}`,
-      task
-    )
+    return instance.put<ChangeTaskResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`, task)
   },
   reorderTask: (todolistId: string, taskId: string, putAfterItemId: string) => {
     return instance.put<ResponseType<{}>>(
@@ -46,5 +43,7 @@ export type GetTasksResponseType = {
   totalCount: number
   error: string
 }
+export type AddTaskResponseType = ResponseType<{ item: TaskType }>
+export type ChangeTaskResponseType = ResponseType<{ item: TaskType }>
 
 export type ChangeTask = Omit<TaskType, 'id' | 'todoListId' | 'order' | 'addedDate'>
