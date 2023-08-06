@@ -5,12 +5,12 @@ import { toast } from 'react-toastify'
 const slice = createSlice({
   name: 'app',
   initialState: {
-    isLoading: false,
+    TodolistLoading: false,
     isAppInitialized: false,
   },
   reducers: {
     setIsLoading: (state, action: PayloadAction<{ isLoading: boolean }>) => {
-      state.isLoading = action.payload.isLoading
+      state.isLoading = action.payload.TodolistLoading
     },
     setIsAppInitialized: (state, action: PayloadAction<{ isAppInitialized: boolean }>) => {
       state.isAppInitialized = action.payload.isAppInitialized
