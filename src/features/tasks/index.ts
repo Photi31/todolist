@@ -1,1 +1,1 @@
-export * from 'features/tasks/components/tasks/tasks.tsx'
+export * from '../tasks'

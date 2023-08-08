@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, ElementType, ReactNode, MouseEvent } from 'react'
 
 import clsx from 'clsx'
 
@@ -11,7 +11,7 @@ export type ButtonProps<T extends ElementType = 'button'> = {
   as?: T
   variant?: 'primary' | 'secondary' | 'tertiary' | 'link'
   fullWidth?: boolean
-  onClick?: () => void
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void
 } & ComponentPropsWithoutRef<'button'>
 
 export const Button = <T extends ElementType = 'button'>(

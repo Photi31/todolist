@@ -1,0 +1,70 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.search {
+  width: 100%;
+  padding: 12px 0;
+}
+
+.todolistsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+
+.todolist {
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  width: 350px;
+  min-width: 350px;
+  height: 50vh;
+  padding: 8px;
+
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-300);
+  border-radius: 6px;
+
+  transition: transform 75ms ease 0s;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  margin-left: 20px;
+}
+
+.main {
+  height: 100%;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.task {
+  overflow: visible;
+  flex-direction: column;
+  flex-shrink: 0;
+
+  height: unset;
+  margin-bottom: 8px;
+
+  background-color: var(--color-dark-500);
+  border: 1px solid var(--color-dark-300);
+  border-radius: 6px;
+}
