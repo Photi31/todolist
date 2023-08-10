@@ -13,19 +13,19 @@ import {
   GetTasksResponseType,
   ReorderTaskArgType,
   tasksApi,
-  TaskType,
+  TasksStateType,
 } from 'features/tasks/tasks.api.ts'
 
-const getTasks = createAppAsyncThunk<{ getTasksResponse: GetTasksResponseType }, GetTasksArgType>(
-  'task/getTasks',
-  async (arg: GetTasksArgType, thunkAPI) => {
-    return thunkTryCatch(thunkAPI, async () => {
-      const res = await tasksApi.getTasks(arg)
+const getTasks = createAppAsyncThunk<
+  { getTasksResponse: GetTasksResponseType; todolistId: string },
+  GetTasksArgType
+>('task/getTasks', async (arg: GetTasksArgType, thunkAPI) => {
+  return thunkTryCatch(thunkAPI, async () => {
+    const res = await tasksApi.getTasks(arg)
 
-      return { getTasksResponse: res.data }
-    })
-  }
-)
+    return { getTasksResponse: res.data, todolistId: arg.todolistId }
+  })
+})
 const addTask = createAppAsyncThunk<{ addTaskResponse: AddTaskResponseType }, AddTaskArgType>(
   'task/addTask',
   async (arg: AddTaskArgType, thunkAPI) => {
@@ -70,15 +70,22 @@ const reorderTask = createAppAsyncThunk<
 const slice = createSlice({
   name: 'task',
   initialState: {
-    tasks: null as TaskType[] | null,
+    tasks: {} as TasksStateType,
     anyChangeTask: false,
   },
-  reducers: {},
+  reducers: {
+    setTodolistId: (state, action) => {
+      state.tasks = {
+        ...state.tasks,
+        [action.payload.todolistId]: [],
+      }
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(getTasks.fulfilled, (state, action) => {
         if (action.payload.getTasksResponse.items.length > 0) {
-          state.tasks = action.payload.getTasksResponse.items
+          state.tasks[action.payload.todolistId] = action.payload.getTasksResponse.items
           state.anyChangeTask = false
         } else {
           toast.error(action.payload.getTasksResponse.error)

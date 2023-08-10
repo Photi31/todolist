@@ -3,6 +3,7 @@ import { toast } from 'react-toastify'
 
 import { createAppAsyncThunk, thunkTryCatch } from 'common/utils'
 import { ResponseType } from 'features/auth/auth.api.ts'
+import { taskActions } from 'features/tasks/tasks.slice.ts'
 import {
   AddTodolistResponseType,
   ChangeTodolistTitleType,
@@ -76,7 +77,12 @@ const slice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(getTodolists.fulfilled, (state, action) => {
-        state.todolists = action.payload.todolists
+        const todolists = action.payload.todolists
+
+        state.todolists = todolists
+        todolists.map(todo => {
+          taskActions.setTodolistId(todo.id)
+        })
         state.anyChangeTodolist = false
       })
       .addCase(addTodolist.fulfilled, (state, action) => {

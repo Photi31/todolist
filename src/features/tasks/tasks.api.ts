@@ -68,6 +68,10 @@ export type GetTasksResponseType = {
   totalCount: number
   error: string
 }
+
+export type TasksStateType = {
+  [key: string]: Array<TaskType>
+}
 export type AddTaskResponseType = ResponseType<{ item: TaskType }>
 export type ChangeTaskResponseType = ResponseType<{ item: TaskType }>
 

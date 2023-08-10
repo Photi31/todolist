@@ -1,3 +1,5 @@
+import { Task } from 'features/tasks/components/task/task.tsx'
+
 import s from './tasks.module.scss'
 
 type TasksPropsType = {
@@ -22,8 +24,8 @@ export const Tasks = (props: TasksPropsType) => {
       addedDate: 'string',
     },
     {
-      description: 'bla bla bla',
-      title: 'task 1',
+      description: 'yo xooo',
+      title: 'task 2',
       completed: false,
       status: 1,
       priority: 1,
@@ -36,5 +38,11 @@ export const Tasks = (props: TasksPropsType) => {
     },
   ]
 
-  return <div className={s.tasksContainer}></div>
+  return (
+    <div className={s.tasksContainer}>
+      {tasks.map(task => {
+        return <Task key={task.id} task={task} todolistId={props.todolistId} />
+      })}
+    </div>
+  )
 }

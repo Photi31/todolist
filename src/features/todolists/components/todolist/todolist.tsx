@@ -44,8 +44,8 @@ export const Todolist = ({ todo }: TodolistPropsType) => {
         <Button variant={variantButton('All')} onClick={sortButtonClick}>
           All
         </Button>
-        <Button variant={variantButton('In Work')} onClick={sortButtonClick}>
-          In Work
+        <Button variant={variantButton('Active')} onClick={sortButtonClick}>
+          Active
         </Button>
         <Button variant={variantButton('Completed')} onClick={sortButtonClick}>
           Completed
