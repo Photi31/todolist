@@ -1,13 +1,22 @@
 import { useNavigate } from 'react-router-dom'
 
 import s from 'app/header/header.module.scss'
+import { useAppDispatch, useAppSelector } from 'common/hooks'
+import { authThunks } from 'features/auth/auth.slice.ts'
+import { LogoutSvg } from 'images/icons/logout.tsx'
 import { Button } from 'ui/button/button.tsx'
 import { Typography } from 'ui/typography'
 
 export const Header = () => {
-  const redirect = useNavigate()
+  const userId = useAppSelector(state => state.auth.userId)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const singIn = () => {
-    redirect('/login')
+    navigate('/login')
+  }
+  const singOut = () => {
+    dispatch(authThunks.logout())
+    navigate('/login')
   }
 
   return (
@@ -16,7 +25,14 @@ export const Header = () => {
         <Typography variant={'large'} className={s.title}>
           todolists
         </Typography>
-        <Button onClick={singIn}>Sing in</Button>
+        {!userId ? (
+          <Button onClick={singIn}>Sing in</Button>
+        ) : (
+          <Button onClick={singOut}>
+            <LogoutSvg />
+            Sing out
+          </Button>
+        )}
       </div>
     </header>
   )
