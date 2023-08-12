@@ -1,7 +1,7 @@
 import { instance } from 'common/api'
 export const authApi = {
-  me: (arg: {}) => {
-    return instance.get<MeResponseType>('auth/me', { params: arg })
+  me: () => {
+    return instance.get<MeResponseType>('auth/me')
   },
   login: (arg: ArgLoginType) => {
     return instance.post<LoginResponseType>('auth/login', arg)

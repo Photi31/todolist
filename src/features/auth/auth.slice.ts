@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 
+import { appActions } from 'app/app.slice.ts'
 import { createAppAsyncThunk, thunkTryCatch } from 'common/utils'
 import {
   ArgLoginType,
@@ -10,11 +11,11 @@ import {
   MeResponseType,
 } from 'features/auth/auth.api.ts'
 
-const me = createAppAsyncThunk<{ meResponse: MeResponseType }, {}>(
+const me = createAppAsyncThunk<{ meResponse: MeResponseType }, void>(
   'auth/me',
-  async (arg: {}, thunkAPI) => {
+  async (arg: void, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
-      const res = await authApi.me(arg)
+      const res = await authApi.me()
 
       return { meResponse: res.data }
     })
