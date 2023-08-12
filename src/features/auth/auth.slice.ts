@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 
-import { appActions } from 'app/app.slice.ts'
 import { createAppAsyncThunk, thunkTryCatch } from 'common/utils'
 import {
   ArgLoginType,

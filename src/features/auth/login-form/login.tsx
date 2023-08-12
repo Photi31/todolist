@@ -1,5 +1,8 @@
 import { useController, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
+import { useAppDispatch, useAppSelector } from 'common/hooks'
+import { authThunks } from 'features/auth/auth.slice.ts'
 import s from 'features/auth/login-form/login.module.scss'
 import { Button } from 'ui/button'
 import { Checkbox } from 'ui/checkBox'
@@ -13,6 +16,9 @@ type FormValues = {
 }
 
 export const LoginForm = () => {
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const userId = useAppSelector(state => state.auth.userId)
   const { control, register, handleSubmit } = useForm<FormValues>()
 
   const {
@@ -23,8 +29,10 @@ export const LoginForm = () => {
     defaultValue: false,
   })
   const onSubmit = (data: FormValues) => {
-    console.log(data)
+    dispatch(authThunks.login(data))
   }
+
+  if (userId) navigate('/todolists')
 
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)}>

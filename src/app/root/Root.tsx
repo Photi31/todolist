@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 
 import { Outlet, useNavigate } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
 
 import { appActions } from 'app/app.slice.ts'
 import { Header } from 'app/header/header.tsx'
@@ -31,22 +30,10 @@ export const Root = () => {
       .finally(() => {
         dispatch(appActions.setIsAppInitialized({ isAppInitialized: true }))
       })
-  }, [dispatch, userId])
+  }, [dispatch])
 
   return (
     <div>
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
       <Header />
       {isLoading && <LinearProgress />}
       <div className={s.container}>{isAppInitialized ? <Outlet /> : <Loader />}</div>

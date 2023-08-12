@@ -22,5 +22,23 @@ const router = createBrowserRouter([
 ])
 
 export function App() {
-  return <RouterProvider router={router} />
+  //todo toast
+  return (
+    <div>
+      {/*<ToastContainer*/}
+      {/*  className={s.toast}*/}
+      {/*  position="top-center"*/}
+      {/*  autoClose={3000}*/}
+      {/*  hideProgressBar={false}*/}
+      {/*  newestOnTop={false}*/}
+      {/*  closeOnClick*/}
+      {/*  rtl={false}*/}
+      {/*  pauseOnFocusLoss*/}
+      {/*  draggable*/}
+      {/*  pauseOnHover*/}
+      {/*  theme="dark"*/}
+      {/*/>*/}
+      <RouterProvider router={router} />
+    </div>
+  )
 }
