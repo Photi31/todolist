@@ -10,16 +10,11 @@ import {
   MeResponseType,
 } from 'features/auth/auth.api.ts'
 
-const me = createAppAsyncThunk<{ meResponse: MeResponseType }, void>(
-  'auth/me',
-  async (arg: void, thunkAPI) => {
-    return thunkTryCatch(thunkAPI, async () => {
-      const res = await authApi.me()
+const me = createAppAsyncThunk<{ meResponse: MeResponseType }, void>('auth/me', async () => {
+  const res = await authApi.me()
 
-      return { meResponse: res.data }
-    })
-  }
-)
+  return { meResponse: res.data }
+})
 const login = createAppAsyncThunk<{ loginResponse: LoginResponseType }, ArgLoginType>(
   'auth/login',
   async (arg: ArgLoginType, thunkAPI) => {
