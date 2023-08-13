@@ -9,10 +9,10 @@ import { Button } from 'ui/button'
 import { Typography } from 'ui/typography'
 
 type TodolistPropsType = {
-  todo: TodolistType
+  tl: TodolistType
 }
 
-export const Todolist = ({ todo }: TodolistPropsType) => {
+export const Todolist = ({ tl }: TodolistPropsType) => {
   const [activeButton, setActiveButton] = useState<string>('All')
 
   const variantButton = (nameButton: string) => {
@@ -24,17 +24,18 @@ export const Todolist = ({ todo }: TodolistPropsType) => {
   }
 
   return (
-    <div className={s.todolist} key={todo.id} id={todo.id}>
+    <div className={s.todolist} key={tl.id} id={tl.id}>
       <div className={s.header}>
         <Typography variant={'h2'} className={s.title}>
-          {todo.title}
+          {tl.title}
         </Typography>
+        {tl.order}
         <Button variant="tertiary">
           <MenuDot />
         </Button>
       </div>
       <div className={s.main}>
-        <Tasks todolistId={todo.id} />
+        <Tasks todolistId={tl.id} />
         <Button variant="tertiary" fullWidth={true}>
           <Plus />
           Add Task

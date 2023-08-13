@@ -2,8 +2,8 @@ import { instance } from 'common/api'
 import { ResponseType } from 'features/auth/auth.api.ts'
 
 export const todolistsApi = {
-  getTodolists: (arg: {}) => {
-    return instance.get<TodolistType[]>('todo-lists', arg)
+  getTodolists: () => {
+    return instance.get<TodolistType[]>('todo-lists')
   },
   addTodolist: (title: string) => {
     return instance.post<AddTodolistResponseType>('todo-lists', title)

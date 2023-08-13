@@ -71,6 +71,7 @@ const slice = createSlice({
   name: 'task',
   initialState: {
     tasks: {} as TasksStateType,
+    taskIsLoading: true,
     anyChangeTask: false,
   },
   reducers: {
@@ -90,6 +91,7 @@ const slice = createSlice({
         } else {
           toast.error(action.payload.getTasksResponse.error)
         }
+        state.taskIsLoading = false
       })
       .addCase(addTask.fulfilled, (state, action) => {
         if (action.payload.addTaskResponse.resultCode === 0) {

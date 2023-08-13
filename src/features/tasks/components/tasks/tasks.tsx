@@ -1,4 +1,9 @@
+import { useEffect } from 'react'
+
+import { useAppDispatch, useAppSelector } from 'common/hooks'
+import { Loader } from 'common/loaders/loader/loader.tsx'
 import { Task } from 'features/tasks/components/task/task.tsx'
+import { taskThunk } from 'features/tasks/tasks.slice.ts'
 
 import s from './tasks.module.scss'
 
@@ -7,42 +12,26 @@ type TasksPropsType = {
 }
 
 export const Tasks = (props: TasksPropsType) => {
-  //todo request on task for todolist
+  const tasks = useAppSelector(state => state.task.tasks[props.todolistId])
+  const taskIsLoading = useAppSelector(state => state.task.taskIsLoading)
+  const dispatch = useAppDispatch()
 
-  const tasks = [
-    {
-      description: 'bla bla bla',
-      title: 'task 1',
-      completed: false,
-      status: 1,
-      priority: 1,
-      startDate: 'string',
-      deadline: 'string',
-      id: '11',
-      todoListId: '1',
-      order: 1,
-      addedDate: 'string',
-    },
-    {
-      description: 'yo xooo',
-      title: 'task 2',
-      completed: false,
-      status: 1,
-      priority: 1,
-      startDate: 'string',
-      deadline: 'string',
-      id: '21',
-      todoListId: '1',
-      order: 1,
-      addedDate: 'string',
-    },
-  ]
+  useEffect(() => {
+    dispatch(taskThunk.getTasks({ todolistId: props.todolistId }))
+  }, [])
 
   return (
     <div className={s.tasksContainer}>
-      {tasks.map(task => {
-        return <Task key={task.id} task={task} todolistId={props.todolistId} />
-      })}
+      {!taskIsLoading ? (
+        <div>
+          {tasks &&
+            tasks.map(task => {
+              return <Task key={task.id} task={task} todolistId={props.todolistId} />
+            })}
+        </div>
+      ) : (
+        <Loader />
+      )}
     </div>
   )
 }

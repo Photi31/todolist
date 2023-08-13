@@ -12,14 +12,12 @@ import {
   TodolistType,
 } from 'features/todolists/todolists.api.ts'
 
-const getTodolists = createAppAsyncThunk<{ todolists: TodolistType[] }, {}>(
+const getTodolists = createAppAsyncThunk<{ todolists: TodolistType[] }, void>(
   'todolist/getTodolists',
-  async (arg: {}, thunkAPI) => {
-    return thunkTryCatch(thunkAPI, async () => {
-      const res = await todolistsApi.getTodolists(arg)
+  async () => {
+    const res = await todolistsApi.getTodolists()
 
-      return { todolists: res.data }
-    })
+    return { todolists: res.data }
   }
 )
 
