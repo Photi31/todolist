@@ -1,8 +1,11 @@
 .loader {
   position: relative;
+
   display: inline-block;
+
   width: 48px;
   height: 48px;
+  margin: 100px auto;
 
   &::after,
   &::before {

@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { toast } from 'react-toastify'
 
 import { createAppAsyncThunk, thunkTryCatch } from 'common/utils'
 import { ResponseType } from 'features/auth/auth.api.ts'
@@ -73,44 +72,44 @@ const slice = createSlice({
   },
   reducers: {},
   extraReducers: builder => {
-    builder
-      .addCase(getTodolists.fulfilled, (state, action) => {
-        const todolists = action.payload.todolists
+    builder.addCase(getTodolists.fulfilled, (state, action) => {
+      const todolists = action.payload.todolists
 
-        state.todolists = todolists
-        todolists.map(todo => {
-          taskActions.setTodolistId(todo.id)
-        })
-        state.anyChangeTodolist = false
+      state.todolists = todolists
+      todolists.map(todo => {
+        taskActions.setTodolistId(todo.id)
       })
-      .addCase(addTodolist.fulfilled, (state, action) => {
-        if (action.payload.addTodolistResponse.resultCode === 0) {
-          state.anyChangeTodolist = true
-        } else {
-          toast.error(action.payload.addTodolistResponse.messages[0])
-        }
-      })
-      .addCase(deleteTodolist.fulfilled, (state, action) => {
-        if (action.payload.deleteTodolistResponse.resultCode === 0) {
-          state.anyChangeTodolist = true
-        } else {
-          toast.error(action.payload.deleteTodolistResponse.messages[0])
-        }
-      })
-      .addCase(changeTodolistTitle.fulfilled, (state, action) => {
-        if (action.payload.changeTodolistTitleResponse.resultCode === 0) {
-          state.anyChangeTodolist = true
-        } else {
-          toast.error(action.payload.changeTodolistTitleResponse.messages[0])
-        }
-      })
-      .addCase(reorderTodolist.fulfilled, (state, action) => {
-        if (action.payload.reorderTodolistResponse.resultCode === 0) {
-          state.anyChangeTodolist = true
-        } else {
-          toast.error(action.payload.reorderTodolistResponse.messages[0])
-        }
-      })
+      state.anyChangeTodolist = false
+    })
+    // .addCase(addTodolist.fulfilled, (state, action) => {
+    //   if (action.payload.addTodolistResponse.resultCode === 0) {
+    //     // todolistThunk.getTodolists()
+    //     // state.anyChangeTodolist = true
+    //   } else {
+    //     toast.error(action.payload.addTodolistResponse.messages[0])
+    //   }
+    // })
+    // .addCase(deleteTodolist.fulfilled, (state, action) => {
+    //   if (action.payload.deleteTodolistResponse.resultCode === 0) {
+    //     state.anyChangeTodolist = true
+    //   } else {
+    //     toast.error(action.payload.deleteTodolistResponse.messages[0])
+    //   }
+    // })
+    // .addCase(changeTodolistTitle.fulfilled, (state, action) => {
+    //   if (action.payload.changeTodolistTitleResponse.resultCode === 0) {
+    //     state.anyChangeTodolist = true
+    //   } else {
+    //     toast.error(action.payload.changeTodolistTitleResponse.messages[0])
+    //   }
+    // })
+    // .addCase(reorderTodolist.fulfilled, (state, action) => {
+    //   if (action.payload.reorderTodolistResponse.resultCode === 0) {
+    //     state.anyChangeTodolist = true
+    //   } else {
+    //     toast.error(action.payload.reorderTodolistResponse.messages[0])
+    //   }
+    // })
   },
 })
 

@@ -13,9 +13,16 @@
 .todolistsContainer {
   display: flex;
   flex-flow: row wrap;
-  gap: 10px;
+  gap: 20px;
+  justify-content: center;
 
   width: 100%;
+}
+
+.addTodolist {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
 }
 
 .todolist {
