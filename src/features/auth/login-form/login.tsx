@@ -26,13 +26,13 @@ const schema = z.object({
     .min(3, 'Login must be at least 3 characters'),
 })
 
-export type FormType = z.infer<typeof schema>
+export type LoginFormType = z.infer<typeof schema>
 
 export const LoginForm = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const userId = useAppSelector(state => state.auth.userId)
-  const { control, handleSubmit } = useForm<FormType>({
+  const { control, handleSubmit } = useForm<LoginFormType>({
     resolver: zodResolver(schema),
     mode: 'onSubmit',
     defaultValues: {
@@ -42,7 +42,7 @@ export const LoginForm = () => {
     },
   })
 
-  const onSubmit = (data: FormType) => {
+  const onSubmit = (data: LoginFormType) => {
     dispatch(authThunks.login(data))
   }
 

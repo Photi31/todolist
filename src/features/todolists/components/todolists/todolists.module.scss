@@ -75,3 +75,14 @@
   border: 1px solid var(--color-dark-300);
   border-radius: 6px;
 }
+
+.closeModalButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.modalTitle {
+  margin-bottom: 30px;
+  text-align: center;
+}
