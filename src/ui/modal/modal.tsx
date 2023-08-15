@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 
 import { clsx } from 'clsx'
 
-import s from 'ui/modalWindow/modal.module.scss'
+import s from 'ui/modal/modal.module.scss'
 
 type ModalPropsType = {
   active: boolean
