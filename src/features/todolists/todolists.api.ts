@@ -12,7 +12,7 @@ export const todolistsApi = {
     return instance.delete<ResponseType<{}>>(`todo-lists/${todolistId}`)
   },
   changeTodolistTitle: ({ todolistId, title }: ChangeTodolistTitleType) => {
-    return instance.put<any>(`todo-lists/${todolistId}`, title)
+    return instance.put<any>(`todo-lists/${todolistId}`, { title })
   },
   reorderTodolist: ({ todolistId, putAfterItemId }: ReorderTodolistType) => {
     return instance.put<ResponseType<{}>>(`/todo-lists/${todolistId}/reorder`, putAfterItemId)

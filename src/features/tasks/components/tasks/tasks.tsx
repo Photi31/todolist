@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import { useAppDispatch, useAppSelector } from 'common/hooks'
-import { Loader } from 'common/loaders/loader/loader.tsx'
+import { LinearProgress } from 'common/loaders/linearProgress/linearProgress.tsx'
 import { Task } from 'features/tasks/components/task/task.tsx'
 import { taskThunk } from 'features/tasks/tasks.slice.ts'
 
@@ -30,7 +30,7 @@ export const Tasks = (props: TasksPropsType) => {
             })}
         </div>
       ) : (
-        <Loader />
+        <LinearProgress />
       )}
     </div>
   )

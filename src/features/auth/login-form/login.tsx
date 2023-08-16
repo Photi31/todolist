@@ -61,6 +61,7 @@ export const LoginForm = () => {
         type="text"
       />
       <ControlledTextField
+        className={s.password}
         placeholder={'Enter you password'}
         label={'Password'}
         name={'password'}

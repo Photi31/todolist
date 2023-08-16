@@ -8,7 +8,7 @@ import { todolistThunk } from 'features/todolists/todolists.slice.ts'
 import { Plus } from 'images/icons/plus.tsx'
 import { Trash } from 'images/icons/trash.tsx'
 import { Button } from 'ui/button'
-import { Typography } from 'ui/typography'
+import { EditableSpan } from 'ui/editableSpan/editableSpan.tsx'
 
 type TodolistPropsType = {
   tl: TodolistType
@@ -32,12 +32,16 @@ export const Todolist = ({ tl }: TodolistPropsType) => {
     })
   }
 
+  const onChangeTitle = (newTitle: string) => {
+    dispatch(todolistThunk.changeTodolistTitle({ todolistId: tl.id, title: newTitle })).then(() => {
+      dispatch(todolistThunk.getTodolists())
+    })
+  }
+
   return (
     <div className={s.todolist} key={tl.id} id={tl.id}>
       <div className={s.header}>
-        <Typography variant={'h2'} className={s.title}>
-          {tl.title}
-        </Typography>
+        <EditableSpan todolistTitle={tl.title} onChangeTitle={onChangeTitle} />
         {tl.order}
         <Button variant="tertiary" onClick={deleteTodolist}>
           <Trash />
