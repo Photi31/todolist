@@ -8,7 +8,7 @@ export const tasksApi = {
     })
   },
   addTask: ({ todolistId, title }: AddTaskArgType) => {
-    return instance.post<AddTaskResponseType>(`/todo-lists/${todolistId}/tasks`, title)
+    return instance.post<AddTaskResponseType>(`/todo-lists/${todolistId}/tasks`, { title })
   },
   deleteTask: ({ todolistId, taskId }: DeleteTaskArgType) => {
     return instance.delete<ResponseType<{}>>(`todo-lists/${todolistId}/tasks/${taskId}`)
@@ -27,7 +27,6 @@ export const tasksApi = {
 export type TaskType = {
   description: string
   title: string
-  completed: boolean
   status: number
   priority: number
   startDate: string

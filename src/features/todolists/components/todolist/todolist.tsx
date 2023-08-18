@@ -5,7 +5,6 @@ import { Tasks } from 'features/tasks/components/tasks/tasks.tsx'
 import s from 'features/todolists/components/todolists/todolists.module.scss'
 import { TodolistType } from 'features/todolists/todolists.api.ts'
 import { todolistThunk } from 'features/todolists/todolists.slice.ts'
-import { Plus } from 'images/icons/plus.tsx'
 import { Trash } from 'images/icons/trash.tsx'
 import { Button } from 'ui/button'
 import { EditableSpan } from 'ui/editableSpan/editableSpan.tsx'
@@ -47,13 +46,7 @@ export const Todolist = ({ tl }: TodolistPropsType) => {
           <Trash />
         </Button>
       </div>
-      <div className={s.main}>
-        <Tasks todolistId={tl.id} />
-        <Button variant="tertiary" fullWidth={true}>
-          <Plus />
-          Add Task
-        </Button>
-      </div>
+      <Tasks todolistId={tl.id} />
       <div className={s.footer}>
         <Button variant={variantButton('All')} onClick={sortButtonClick}>
           All
