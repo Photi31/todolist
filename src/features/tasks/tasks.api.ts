@@ -25,12 +25,12 @@ export const tasksApi = {
 }
 
 export type TaskType = {
-  description: string
-  title: string
-  status: number
-  priority: number
-  startDate: string
-  deadline: string
+  description?: string
+  title?: string
+  status?: number
+  priority?: number
+  startDate?: string
+  deadline?: string
   id: string
   todoListId: string
   order: number

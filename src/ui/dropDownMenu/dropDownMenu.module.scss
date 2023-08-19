@@ -1,0 +1,42 @@
+.menu {
+  position: absolute;
+  z-index: 2;
+  top: 42px;
+  right: 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 300px;
+  padding: 12px;
+
+  background: var(--color-dark-500);
+  border: 1px solid var(--color-dark-300);
+  border-radius: 6px;
+  box-shadow: 0 4px 18px 0 rgb(76 76 76 / 75%);
+}
+
+.triangle {
+  position: absolute;
+  z-index: 0;
+  top: -20px;
+  right: 41px;
+
+  display: inline-block;
+
+  border: 10px solid transparent;
+  border-bottom: 10px solid var(--color-dark-300);
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: -8px;
+    left: -10px;
+
+    display: inline-block;
+
+    border: 10px solid transparent;
+    border-bottom: 10px solid var(--color-dark-500);
+  }
+}
