@@ -46,7 +46,7 @@ export const Todolist = ({ tl }: TodolistPropsType) => {
           <Trash />
         </Button>
       </div>
-      <Tasks todolistId={tl.id} />
+      <Tasks todolistId={tl.id} activeButtonFiltration={activeButton} />
       <div className={s.footer}>
         <Button variant={variantButton('All')} onClick={sortButtonClick}>
           All

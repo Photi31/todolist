@@ -12,9 +12,10 @@ import s from './tasks.module.scss'
 
 type TasksPropsType = {
   todolistId: string
+  activeButtonFiltration: string
 }
 
-export const Tasks = ({ todolistId }: TasksPropsType) => {
+export const Tasks = ({ todolistId, activeButtonFiltration }: TasksPropsType) => {
   const tasks = useAppSelector(state => state.task.tasks[todolistId])
   const taskIsLoading = useAppSelector(state => state.task.taskIsLoading)
   const dispatch = useAppDispatch()
@@ -28,12 +29,21 @@ export const Tasks = ({ todolistId }: TasksPropsType) => {
     setActiveModal(true)
   }
 
+  let filtratedTask = tasks
+
+  if (activeButtonFiltration === 'Active') {
+    filtratedTask = tasks.filter(t => t.status === 0)
+  }
+  if (activeButtonFiltration === 'Completed') {
+    filtratedTask = tasks.filter(t => t.status === 1)
+  }
+
   return (
     <div className={s.main}>
       {!taskIsLoading ? (
         <div className={s.tasksContainer}>
-          {tasks &&
-            tasks.map(task => {
+          {filtratedTask &&
+            filtratedTask.map(task => {
               return <Task key={task.id} task={task} todolistId={todolistId} />
             })}
         </div>
