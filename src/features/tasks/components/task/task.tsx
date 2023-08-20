@@ -57,7 +57,7 @@ export const Task = ({ task, todolistId }: TaskPropstype) => {
   const changeTaskChecked = () => {
     const status = task.status === 1 ? 0 : 1
 
-    changeTask({ status })
+    changeTask({ status, title: task.title })
   }
 
   const deleteTask = () => {
@@ -134,14 +134,14 @@ export const Task = ({ task, todolistId }: TaskPropstype) => {
             >
               Change Task
             </Button>
-            <ChangeTaskModal
-              task={task}
-              activeModal={activeModal}
-              setActiveModal={setActiveModal}
-              onSubmit={onSubmit}
-            />
           </DropDownMenu>
         )}
+        <ChangeTaskModal
+          task={task}
+          activeModal={activeModal}
+          setActiveModal={setActiveModal}
+          onSubmit={onSubmit}
+        />
       </div>
     </div>
   )

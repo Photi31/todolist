@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { Loader } from 'common/loaders/loader/loader.tsx'
+import { taskActions } from 'features/tasks/tasks.slice.ts'
 import { Todolist } from 'features/todolists/components/todolist/todolist.tsx'
 import { todolistThunk } from 'features/todolists/todolists.slice.ts'
 import { Plus } from 'images/icons/plus.tsx'
@@ -24,9 +25,18 @@ export const Todolists = () => {
     setActiveModal(true)
   }
 
+  const searchTask = (inputValue: string) => {
+    dispatch(taskActions.setSearchValue({ searchValue: inputValue }))
+  }
+
   return (
     <div className={s.container}>
-      <TextField className={s.search} type="search" placeholder="filter by keyword or by field" />
+      <TextField
+        className={s.search}
+        type="search"
+        placeholder="filter tasks by keyword"
+        searchFunction={searchTask}
+      />
       <Button variant="primary" className={s.addTodolist} onClick={openModal}>
         <Plus />
         Add Todolist

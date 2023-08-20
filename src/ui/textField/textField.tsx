@@ -1,7 +1,8 @@
-import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useEffect, useState } from 'react'
 
 import clsx from 'clsx'
 
+import { useDebounce } from 'common/hooks'
 import { Close } from 'images/icons/close.tsx'
 import { EyeSlash } from 'images/icons/eye-slash.tsx'
 import { Eye } from 'images/icons/eye.tsx'
@@ -18,6 +19,7 @@ export type TextFieldType = {
   placeholder?: string
   disabled?: boolean
   errorMessage?: string
+  searchFunction?: (inputValue: string) => void
 } & ComponentPropsWithoutRef<'input'>
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldType>((props, ref) => {
@@ -28,10 +30,18 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldType>((props, ref
     placeholder = 'Input',
     type = 'text',
     label,
+    searchFunction,
     ...rest
   } = props
   const [isEye, setIsEye] = useState<boolean>(true)
   const [inputValue, setInputValue] = useState<string>('')
+  const debouncedValue = useDebounce<string>(inputValue, 600)
+
+  useEffect(() => {
+    if (searchFunction) {
+      searchFunction(inputValue)
+    }
+  }, [debouncedValue])
 
   const showError = !!errorMessage && errorMessage.length > 0
   const changeInputValue = (e: ChangeEvent<HTMLInputElement>) => {

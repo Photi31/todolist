@@ -72,7 +72,7 @@ const slice = createSlice({
   initialState: {
     tasks: {} as TasksStateType,
     taskIsLoading: true,
-    anyChangeTask: false,
+    searchValue: '',
   },
   reducers: {
     setTodolistId: (state, action) => {
@@ -81,46 +81,47 @@ const slice = createSlice({
         [action.payload.todolistId]: [],
       }
     },
+    setSearchValue: (state, action) => {
+      state.searchValue = action.payload.searchValue
+    },
   },
   extraReducers: builder => {
-    builder
-      .addCase(getTasks.fulfilled, (state, action) => {
-        if (action.payload.getTasksResponse.items.length > 0) {
-          state.tasks[action.payload.todolistId] = action.payload.getTasksResponse.items
-          state.anyChangeTask = false
-        } else {
-          toast.error(action.payload.getTasksResponse.error)
-        }
-        state.taskIsLoading = false
-      })
-      .addCase(addTask.fulfilled, (state, action) => {
-        if (action.payload.addTaskResponse.resultCode === 0) {
-          state.anyChangeTask = true
-        } else {
-          toast.error(action.payload.addTaskResponse.messages[0])
-        }
-      })
-      .addCase(deleteTask.fulfilled, (state, action) => {
-        if (action.payload.deleteTaskResponse.resultCode === 0) {
-          state.anyChangeTask = true
-        } else {
-          toast.error(action.payload.deleteTaskResponse.messages[0])
-        }
-      })
-      .addCase(changeTask.fulfilled, (state, action) => {
-        if (action.payload.changeTaskResponse.resultCode === 0) {
-          state.anyChangeTask = true
-        } else {
-          toast.error(action.payload.changeTaskResponse.messages[0])
-        }
-      })
-      .addCase(reorderTask.fulfilled, (state, action) => {
-        if (action.payload.reorderTaskResponse.resultCode === 0) {
-          state.anyChangeTask = true
-        } else {
-          toast.error(action.payload.reorderTaskResponse.messages[0])
-        }
-      })
+    builder.addCase(getTasks.fulfilled, (state, action) => {
+      if (action.payload.getTasksResponse.items.length > 0) {
+        state.tasks[action.payload.todolistId] = action.payload.getTasksResponse.items
+      } else {
+        toast.error(action.payload.getTasksResponse.error)
+      }
+      state.taskIsLoading = false
+    })
+    // .addCase(addTask.fulfilled, (state, action) => {
+    //   if (action.payload.addTaskResponse.resultCode === 0) {
+    //     state.anyChangeTask = true
+    //   } else {
+    //     toast.error(action.payload.addTaskResponse.messages[0])
+    //   }
+    // })
+    // .addCase(deleteTask.fulfilled, (state, action) => {
+    //   if (action.payload.deleteTaskResponse.resultCode === 0) {
+    //     state.anyChangeTask = true
+    //   } else {
+    //     toast.error(action.payload.deleteTaskResponse.messages[0])
+    //   }
+    // })
+    // .addCase(changeTask.fulfilled, (state, action) => {
+    //   if (action.payload.changeTaskResponse.resultCode === 0) {
+    //     state.anyChangeTask = true
+    //   } else {
+    //     toast.error(action.payload.changeTaskResponse.messages[0])
+    //   }
+    // })
+    // .addCase(reorderTask.fulfilled, (state, action) => {
+    //   if (action.payload.reorderTaskResponse.resultCode === 0) {
+    //     state.anyChangeTask = true
+    //   } else {
+    //     toast.error(action.payload.reorderTaskResponse.messages[0])
+    //   }
+    // })
   },
 })
 

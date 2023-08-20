@@ -18,6 +18,7 @@ type TasksPropsType = {
 export const Tasks = ({ todolistId, activeButtonFiltration }: TasksPropsType) => {
   const tasks = useAppSelector(state => state.task.tasks[todolistId])
   const taskIsLoading = useAppSelector(state => state.task.taskIsLoading)
+  const searchValue = useAppSelector(state => state.task.searchValue)
   const dispatch = useAppDispatch()
   const [activeModal, setActiveModal] = useState<boolean>(false)
 
@@ -36,6 +37,10 @@ export const Tasks = ({ todolistId, activeButtonFiltration }: TasksPropsType) =>
   }
   if (activeButtonFiltration === 'Completed') {
     filtratedTask = tasks.filter(t => t.status === 1)
+  }
+
+  if (searchValue) {
+    filtratedTask = filtratedTask.filter(t => t.title?.indexOf(searchValue) > -1)
   }
 
   return (
