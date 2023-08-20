@@ -76,13 +76,13 @@ export const Task = ({ task, todolistId }: TaskPropstype) => {
       case 1:
         return '#ff8099'
       case 2:
-        return '#ffd073'
+        return '#640'
       case 3:
-        return '#bea6ff'
+        return '#704ecc'
       case 4:
-        return '#73a5ff'
+        return '#234e99'
       default:
-        return '#80ffbf'
+        return '#0a6638'
     }
   }
 
