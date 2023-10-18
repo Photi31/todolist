@@ -16,11 +16,11 @@ export const tasksApi = {
   changeTask: ({ todolistId, taskId, task }: ChangeTaskArgType) => {
     return instance.put<ChangeTaskResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`, task)
   },
-  reorderTask: ({ todolistId, taskId, putAfterItemId }: ReorderTaskArgType) => {
-    return instance.put<ResponseType<{}>>(
-      `todo-lists/${todolistId}/tasks/${taskId}`,
-      putAfterItemId
-    )
+  reorderTask: ({ todolistId, taskId, putAfterItemId, title }: ReorderTaskArgType) => {
+    return instance.put<ResponseType<{}>>(`todo-lists/${todolistId}/tasks/${taskId}`, {
+      putAfterItemId: putAfterItemId,
+      title: title,
+    })
   },
 }
 
@@ -60,6 +60,7 @@ export type ReorderTaskArgType = {
   todolistId: string
   taskId: string
   putAfterItemId: string
+  title: string
 }
 
 export type GetTasksResponseType = {

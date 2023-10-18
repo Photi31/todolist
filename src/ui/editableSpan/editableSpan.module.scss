@@ -1,12 +1,33 @@
 .title {
   cursor: pointer;
 
+  position: relative;
+
+  overflow-x: hidden;
   display: flex;
   align-items: center;
 
-  width: 50%;
+  width: 60%;
   height: 38px;
   margin-left: 20px;
+
+  text-wrap: nowrap;
+
+  &::after {
+    pointer-events: none;
+    content: '';
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    width: 30%;
+    height: 38px;
+
+    text-align: right;
+
+    background: linear-gradient(to right, rgb(0 0 0 / 0%), rgb(23 23 23 / 100%));
+  }
 }
 
 .input {

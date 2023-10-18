@@ -94,34 +94,6 @@ const slice = createSlice({
       }
       state.taskIsLoading = false
     })
-    // .addCase(addTask.fulfilled, (state, action) => {
-    //   if (action.payload.addTaskResponse.resultCode === 0) {
-    //     state.anyChangeTask = true
-    //   } else {
-    //     toast.error(action.payload.addTaskResponse.messages[0])
-    //   }
-    // })
-    // .addCase(deleteTask.fulfilled, (state, action) => {
-    //   if (action.payload.deleteTaskResponse.resultCode === 0) {
-    //     state.anyChangeTask = true
-    //   } else {
-    //     toast.error(action.payload.deleteTaskResponse.messages[0])
-    //   }
-    // })
-    // .addCase(changeTask.fulfilled, (state, action) => {
-    //   if (action.payload.changeTaskResponse.resultCode === 0) {
-    //     state.anyChangeTask = true
-    //   } else {
-    //     toast.error(action.payload.changeTaskResponse.messages[0])
-    //   }
-    // })
-    // .addCase(reorderTask.fulfilled, (state, action) => {
-    //   if (action.payload.reorderTaskResponse.resultCode === 0) {
-    //     state.anyChangeTask = true
-    //   } else {
-    //     toast.error(action.payload.reorderTaskResponse.messages[0])
-    //   }
-    // })
   },
 })
 
