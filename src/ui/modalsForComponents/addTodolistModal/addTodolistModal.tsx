@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -30,13 +32,17 @@ type AddTodolistModalPropsType = {
 export const AddTodolistModal = ({ activeModal, setActiveModal }: AddTodolistModalPropsType) => {
   const dispatch = useAppDispatch()
 
-  const { control, handleSubmit } = useForm<AddTodolistFormType>({
+  const { control, handleSubmit, resetField } = useForm<AddTodolistFormType>({
     resolver: zodResolver(schema),
     mode: 'onSubmit',
     defaultValues: {
       todolistTitle: '',
     },
   })
+
+  useEffect(() => {
+    if (!activeModal) resetField('todolistTitle')
+  }, [activeModal])
 
   const onSubmit = (data: AddTodolistFormType) => {
     dispatch(todolistThunk.addTodolist(data.todolistTitle)).then(() => {
@@ -48,8 +54,6 @@ export const AddTodolistModal = ({ activeModal, setActiveModal }: AddTodolistMod
   const closeButtonClick = () => {
     setActiveModal(false)
   }
-
-  //todo fix bug with close modal - clear textField
 
   return (
     <Modal active={activeModal} setActive={setActiveModal}>

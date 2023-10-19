@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -35,13 +37,17 @@ export const AddTaskModal = ({
 }: AddTaskModalPropsType) => {
   const dispatch = useAppDispatch()
 
-  const { control, handleSubmit } = useForm<AddTaskFormType>({
+  const { control, handleSubmit, resetField } = useForm<AddTaskFormType>({
     resolver: zodResolver(schema),
     mode: 'onSubmit',
     defaultValues: {
       taskTitle: '',
     },
   })
+
+  useEffect(() => {
+    if (!activeModal) resetField('taskTitle')
+  }, [activeModal])
 
   const onSubmit = (data: AddTaskFormType) => {
     dispatch(taskThunk.addTask({ todolistId: todolistId, title: data.taskTitle })).then(() => {
@@ -53,8 +59,6 @@ export const AddTaskModal = ({
   const closeButtonClick = () => {
     setActiveModal(false)
   }
-
-  //todo fix bug with close modal - clear textField
 
   return (
     <Modal active={activeModal} setActive={setActiveModal}>
