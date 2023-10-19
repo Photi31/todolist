@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -42,11 +44,13 @@ export const LoginForm = () => {
     },
   })
 
+  useEffect(() => {
+    if (userId) navigate('/todolists')
+  }, [userId])
+
   const onSubmit = (data: LoginFormType) => {
     dispatch(authThunks.login(data))
   }
-
-  if (userId) navigate('/todolists')
 
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)}>

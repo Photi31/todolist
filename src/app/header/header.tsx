@@ -16,7 +16,10 @@ export const Header = () => {
   }
   const singOut = () => {
     dispatch(authThunks.logout())
-    navigate('/login')
+      .unwrap()
+      .then(() => {
+        navigate('/login')
+      })
   }
 
   return (
