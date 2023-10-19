@@ -1,8 +1,12 @@
+import { useEffect } from 'react'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { useAppDispatch } from 'common/hooks'
 import { TaskType } from 'features/tasks/tasks.api.ts'
+import { taskActions } from 'features/tasks/tasks.slice.ts'
 import { Close } from 'images/icons/close.tsx'
 import { Button } from 'ui/button'
 import { ControlledTextField } from 'ui/controlled/controlledTextField.tsx'
@@ -33,18 +37,30 @@ export const ChangeTaskModal = ({
   setActiveModal,
   onSubmit,
 }: ChangeTaskModalPropsType) => {
-  const { control, handleSubmit } = useForm<ChangeTaskFormType>({
+  const description = task.description === null ? '' : task.description
+  const { control, handleSubmit, resetField } = useForm<ChangeTaskFormType>({
     resolver: zodResolver(schema),
     mode: 'onSubmit',
     defaultValues: {
-      description: `${task.description}` || 'Enter description for task',
+      description: `${description}`,
       title: `${task.title}`,
       priority: task.priority,
     },
   })
 
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (!activeModal) {
+      resetField('description')
+      resetField('priority')
+      resetField('title')
+    }
+  }, [activeModal])
+
   const closeButtonClick = () => {
     setActiveModal(false)
+    dispatch(taskActions.setTaskWithOpenMenu({ taskWithOpenMenu: '' }))
   }
 
   const onSubmitForm = (data: ChangeTaskFormType) => {
@@ -55,7 +71,7 @@ export const ChangeTaskModal = ({
   //todo fix bug with close modal - clear textField
 
   return (
-    <Modal active={activeModal} setActive={setActiveModal}>
+    <Modal active={activeModal} setActive={closeButtonClick}>
       <form className={s.form} onSubmit={handleSubmit(onSubmitForm)}>
         <Typography variant="subtitle1" className={s.modalTitle}>
           Change Task

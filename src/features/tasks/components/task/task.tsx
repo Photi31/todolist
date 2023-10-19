@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-import { useAppDispatch } from 'common/hooks'
+import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { ChangeTask, TaskType } from 'features/tasks/tasks.api.ts'
-import { taskThunk } from 'features/tasks/tasks.slice.ts'
+import { taskActions, taskThunk } from 'features/tasks/tasks.slice.ts'
 import { MenuDot } from 'images/icons/menuDot.tsx'
 import { Trash } from 'images/icons/trash.tsx'
 import { Button } from 'ui/button'
@@ -22,12 +22,16 @@ type TaskPropstype = {
   todolistId: string
 }
 export const Task = ({ task, todolistId }: TaskPropstype) => {
+  const menuOpened = useAppSelector(state => state.task.taskWithOpenMenu) === task.id
   const dispatch = useAppDispatch()
-  const [openMenu, setOpenMenu] = useState<boolean>(false)
   const [activeModal, setActiveModal] = useState<boolean>(false)
 
   const menuHandler = () => {
-    setOpenMenu(!openMenu)
+    if (menuOpened) {
+      dispatch(taskActions.setTaskWithOpenMenu({ taskWithOpenMenu: '' }))
+    } else {
+      dispatch(taskActions.setTaskWithOpenMenu({ taskWithOpenMenu: task.id }))
+    }
   }
 
   const openChangeTaskModal = () => {
@@ -52,6 +56,7 @@ export const Task = ({ task, todolistId }: TaskPropstype) => {
       })
     ).then(() => {
       dispatch(taskThunk.getTasks({ todolistId }))
+      dispatch(taskActions.setTaskWithOpenMenu({ taskWithOpenMenu: '' }))
     })
   }
   const changeTaskChecked = () => {
@@ -68,7 +73,6 @@ export const Task = ({ task, todolistId }: TaskPropstype) => {
 
   const onSubmit = (data: ChangeTaskFormType) => {
     changeTask(data)
-    setOpenMenu(false)
   }
 
   const priorityColor = () => {
@@ -101,7 +105,7 @@ export const Task = ({ task, todolistId }: TaskPropstype) => {
         <div className={s1.buttonWrapper} onClick={deleteTask}>
           <Trash className={s.deleteTask} />
         </div>
-        {openMenu && (
+        {menuOpened && (
           <DropDownMenu>
             {task.description && (
               <div className={s.item}>

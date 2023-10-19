@@ -73,6 +73,7 @@ const slice = createSlice({
     tasks: {} as TasksStateType,
     taskIsLoading: true,
     searchValue: '',
+    taskWithOpenMenu: '',
   },
   reducers: {
     setTodolistId: (state, action) => {
@@ -83,6 +84,9 @@ const slice = createSlice({
     },
     setSearchValue: (state, action) => {
       state.searchValue = action.payload.searchValue
+    },
+    setTaskWithOpenMenu: (state, action) => {
+      state.taskWithOpenMenu = action.payload.taskWithOpenMenu
     },
   },
   extraReducers: builder => {
