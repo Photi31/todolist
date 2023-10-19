@@ -40,7 +40,7 @@ export const Tasks = ({ todolistId, activeButtonFiltration }: TasksPropsType) =>
   }
 
   if (searchValue) {
-    filtratedTask = filtratedTask.filter(t => t.title?.indexOf(searchValue) > -1)
+    filtratedTask = filtratedTask?.filter(t => t.title?.indexOf(searchValue) > -1)
   }
 
   return (

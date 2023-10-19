@@ -41,7 +41,6 @@ export const Todolist = ({ tl }: TodolistPropsType) => {
     <div className={s.todolist} key={tl.id} id={tl.id}>
       <div className={s.header}>
         <EditableSpan todolistTitle={tl.title} onChangeTitle={onChangeTitle} />
-        {tl.order}
         <Button variant="tertiary" onClick={deleteTodolist}>
           <Trash />
         </Button>
