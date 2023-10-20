@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from 'common/hooks'
 import { LinearProgress } from 'common/loaders/linearProgress/linearProgress.tsx'
 import { Task } from 'features/tasks/components/task/task.tsx'
 import { taskThunk } from 'features/tasks/tasks.slice.ts'
+import { todolistActions } from 'features/todolists/todolists.slice.ts'
 import { Plus } from 'images/icons/plus.tsx'
 import { Button } from 'ui/button'
 import { AddTaskModal } from 'ui/modalsForComponents/addTaskModal/addTaskModal.tsx'
@@ -39,8 +40,13 @@ export const Tasks = ({ todolistId, activeButtonFiltration }: TasksPropsType) =>
     filtratedTask = tasks.filter(t => t.status === 1)
   }
 
-  if (searchValue) {
+  if (searchValue.length > 0) {
     filtratedTask = filtratedTask?.filter(t => t.title?.indexOf(searchValue) > -1)
+    if (filtratedTask.length === 0) {
+      dispatch(
+        todolistActions.setEmptyTodolistAfterFiltering({ emptyTodolistAfterFiltering: todolistId })
+      )
+    }
   }
 
   return (
