@@ -69,8 +69,26 @@ const slice = createSlice({
   initialState: {
     todolists: null as TodolistType[] | null,
     anyChangeTodolist: false,
+    emptyTodolistAfterFiltering: [] as string[],
   },
-  reducers: {},
+  reducers: {
+    setEmptyTodolistAfterFiltering: (state, action) => {
+      if (
+        state.emptyTodolistAfterFiltering.indexOf(action.payload.emptyTodolistAfterFiltering) === -1
+      ) {
+        state.emptyTodolistAfterFiltering.push(action.payload.emptyTodolistAfterFiltering)
+      }
+    },
+    deleteEmptyTodolistAfterFiltering: (state, action) => {
+      const indexTodolist = state.emptyTodolistAfterFiltering.indexOf(
+        action.payload.emptyTodolistAfterFiltering
+      )
+
+      if (indexTodolist > -1) {
+        state.emptyTodolistAfterFiltering.splice(indexTodolist, 1)
+      }
+    },
+  },
   extraReducers: builder => {
     builder.addCase(getTodolists.fulfilled, (state, action) => {
       const todolists = action.payload.todolists
@@ -81,35 +99,6 @@ const slice = createSlice({
       })
       state.anyChangeTodolist = false
     })
-    // .addCase(addTodolist.fulfilled, (state, action) => {
-    //   if (action.payload.addTodolistResponse.resultCode === 0) {
-    //     // todolistThunk.getTodolists()
-    //     // state.anyChangeTodolist = true
-    //   } else {
-    //     toast.error(action.payload.addTodolistResponse.messages[0])
-    //   }
-    // })
-    // .addCase(deleteTodolist.fulfilled, (state, action) => {
-    //   if (action.payload.deleteTodolistResponse.resultCode === 0) {
-    //     state.anyChangeTodolist = true
-    //   } else {
-    //     toast.error(action.payload.deleteTodolistResponse.messages[0])
-    //   }
-    // })
-    // .addCase(changeTodolistTitle.fulfilled, (state, action) => {
-    //   if (action.payload.changeTodolistTitleResponse.resultCode === 0) {
-    //     state.anyChangeTodolist = true
-    //   } else {
-    //     toast.error(action.payload.changeTodolistTitleResponse.messages[0])
-    //   }
-    // })
-    // .addCase(reorderTodolist.fulfilled, (state, action) => {
-    //   if (action.payload.reorderTodolistResponse.resultCode === 0) {
-    //     state.anyChangeTodolist = true
-    //   } else {
-    //     toast.error(action.payload.reorderTodolistResponse.messages[0])
-    //   }
-    // })
   },
 })
 

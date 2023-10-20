@@ -10,7 +10,6 @@
   display: flex;
   align-items: center;
 
-
   font-size: var(--font-size-s);
   line-height: var(--line-height-m);
   color: var(--color-light-100);
@@ -31,12 +30,12 @@
   width: 18px;
   height: 18px;
 
-  background-color: var(--color-dark-900);
+  background-color: var(--color-dark-700);
   border: 2px solid var(--color-light-900);
   border-radius: 2px;
 
   &:focus {
-    background-color: var(--color-dark-900);
+    background-color: var(--color-dark-700);
   }
 
   &:disabled {
