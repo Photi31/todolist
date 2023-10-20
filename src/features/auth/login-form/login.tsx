@@ -18,7 +18,7 @@ const schema = z.object({
     .string()
     .trim()
     .nonempty('Enter password')
-    .min(8, 'Password must be at least 8 characters'),
+    .min(3, 'Password must be at least 8 characters'),
   rememberMe: z.boolean(),
   email: z
     .string()
@@ -53,29 +53,39 @@ export const LoginForm = () => {
   }
 
   return (
-    <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-      <Typography variant={'h1'} className={s.title}>
-        Sing in
-      </Typography>
-      <ControlledTextField
-        placeholder={'Enter you email'}
-        label={'Email'}
-        name={'email'}
-        control={control}
-        type="text"
-      />
-      <ControlledTextField
-        className={s.password}
-        placeholder={'Enter you password'}
-        label={'Password'}
-        name={'password'}
-        control={control}
-        type="password"
-      />{' '}
-      <ControlledCheckbox label={'Remember me'} name={'rememberMe'} control={control} />
-      <Button fullWidth={true} className={s.button} type={'submit'}>
-        Sing in
-      </Button>
-    </form>
+    <>
+      <div className={s.testData}>
+        <Typography variant={'h1'}>Тестовые Email и Password</Typography>
+        <Typography color={'inherit'} variant={'caption'}>
+          Если у вас нет своего логина и пароля, вы можите воспользоваться тествыми данными:
+        </Typography>
+        <Typography variant={'body1'}>Email: free@samuraijs.com</Typography>
+        <Typography variant={'body1'}>Password: free</Typography>
+      </div>
+      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+        <Typography variant={'h1'} className={s.title}>
+          Sing in
+        </Typography>
+        <ControlledTextField
+          placeholder={'Enter you email'}
+          label={'Email'}
+          name={'email'}
+          control={control}
+          type="text"
+        />
+        <ControlledTextField
+          className={s.password}
+          placeholder={'Enter you password'}
+          label={'Password'}
+          name={'password'}
+          control={control}
+          type="password"
+        />{' '}
+        <ControlledCheckbox label={'Remember me'} name={'rememberMe'} control={control} />
+        <Button fullWidth={true} className={s.button} type={'submit'}>
+          Sing in
+        </Button>
+      </form>
+    </>
   )
 }
